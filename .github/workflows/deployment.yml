@@ -22,7 +22,8 @@ jobs:
           debug: true
           script: |
             cd /home/ubuntu/cc26-p-products-store
-            git pull
+            git fetch origin
+            git reset --hard origin/main
             sudo docker build -t my-app-image .
             sudo docker rm -f my-app || true
             sudo docker run -d --name my-app -p 5173:5173 my-app-image
