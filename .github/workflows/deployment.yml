@@ -26,4 +26,4 @@ jobs:
             cd /home/ubuntu/cc26-p-products-store
             git pull
             docker build -t my-app-image .
-            docker run --name my-app -p 5173:5173 my-app-image
+            docker run -d --name my-app -p 5173:5173 my-app-image
