@@ -13,9 +13,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Docker Build And Push
-        run: |
-
       - name: Deploy On AWS EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -26,7 +23,11 @@ jobs:
           script: |
             cd /home/ubuntu/cc26-p-products-store
             git pull
-            sudo docker build -t my-app-image .
-            sudo docker stop my-app 
-            sudo docker rm my-app
-            sudo docker run -d --name my-app -p 5173:5173 my-app-image
+            npm ci 
+            npm run dev
+
+      - name: Docker Build And Push
+        script: |
+          sudo docker build -t my-app-image .
+          sudo docker rm -f my-app || true
+          sudo docker run -d --name my-app -p 5173:5173 my-app-image
