@@ -22,6 +22,7 @@ jobs:
           host: 13.233.195.161
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
+          debug: true
           script: |
             cd /home/ubuntu/cc26-p-products-store
             git pull
