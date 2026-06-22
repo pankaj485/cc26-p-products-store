@@ -24,4 +24,6 @@ jobs:
             cd /home/ubuntu/cc26-p-products-store
             git pull
             npm ci 
-            npm run dev
+            pm2 stop my-app 
+            pm2 delete my-app 
+            pm2 start npm --name "my-app" -- run dev -- --host
