@@ -1,0 +1,26 @@
+name: Deployment On AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+  steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Deploy On AWS EC2
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: 13.233.195.161
+        username: ubuntu
+        key: ${{ secrets.PRIVATE_KEY }}
+        script: |
+          cd /home/ubuntu/cc26-p-products-store
+          git pull
+          npm i
+          pm2 restart 0
